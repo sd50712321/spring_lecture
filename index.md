@@ -39,18 +39,31 @@ h1, h2, h3 {
 }
 </style>
 
-<div id="table-of-contents">
-  <h2>Table of Contents</h2>
-  <a href="#chapter-1">Chapter 1</a>
-  <a href="#chapter-2">Chapter 2</a>
-</div>
-
-<div id="content">
+<html>
+<head>
+  <script>
+    function showChapter(chapter) {
+      var chapters = ['chapter1', 'chapter2'];
+      for (var i = 0; i < chapters.length; i++) {
+        document.getElementById(chapters[i]).style.display = 'none';
+      }
+      document.getElementById(chapter).style.display = 'block';
+    }
+  </script>
+</head>
+<body>
   <h1>My Book</h1>
-  
-  <h2 id="chapter-1">Chapter 1</h2>
-  <p>This is the first chapter.</p>
-  
-  <h2 id="chapter-2">Chapter 2</h2>
-  <p>This is the second chapter.</p>
-</div>
+  <div id="chapters">
+    <a href="#" onclick="showChapter('chapter1');">Chapter 1</a>
+    <a href="#" onclick="showChapter('chapter2');">Chapter 2</a>
+  </div>
+  <div id="chapter1" style="display:block;">
+    <h2>Chapter 1</h2>
+    [Chapter 1](./chapter1.md)
+  </div>
+  <div id="chapter2" style="display:none;">
+    <h2>Chapter 2</h2>
+    [Chapter 2](./chapter2.md)
+  </div>
+</body>
+</html>
