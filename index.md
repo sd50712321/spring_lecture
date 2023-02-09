@@ -45,5 +45,5 @@ This is the main page of my book.
 
 ## Table of Contents
 
-- [Chapter 1](./chapter1.md)
-- [Chapter 2](./chapter2.md)
+- [Chapter 1](./chapter1.md#chapter-1)
+- [Chapter 2](./chapter2.md#chapter-2)
