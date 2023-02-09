@@ -1,10 +1,11 @@
 ---
 layout: default
+title: My Book
 ---
 
 # My Book
 
-Welcome to my book!
+{% include toc.html %}
 
 ## Chapter 1
 

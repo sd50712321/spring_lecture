@@ -2,8 +2,19 @@
 <html>
   <head>
     <title>{{ page.title }}</title>
+    <style>
+      .toc {
+        float: left;
+        width: 20%;
+      }
+      .content {
+        float: right;
+        width: 80%;
+      }
+    </style>
   </head>
   <body>
-    {{ content }}
+    <div class="toc">{% include toc.html %}</div>
+    <div class="content">{{ content }}</div>
   </body>
 </html>
