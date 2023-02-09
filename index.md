@@ -39,12 +39,6 @@ h1, h2, h3 {
 }
 </style>
 
-<div id="table-of-contents">
-  <h2>Table of Contents</h2>
-  <a href="#chapter-1">Chapter 1</a>
-  <a href="#chapter-2">Chapter 2</a>
-</div>
-
 <div id="content">
   <h1>My Book</h1>
   
