@@ -18,8 +18,25 @@
     java -jar [jar파일명].jar
   ```
 - ### war
+
   - War 파일은 Java EE 애플리케이션 서버에서 실행됩니다. Java EE 애플리케이션 서버에는 Tomcat, JBoss, WebLogic, WebSphere 등이 있습니다.
     웹 애플리케이션을 빌드하고 War 파일을 생성하려면 다음과 같은 명령어를 사용합니다.
+
   ```bash
     jar -cvf [war파일명].war [빌드할 디렉토리/파일명]
   ```
+
+  - 프로젝트를 빌드합니다.
+  - WAR 파일 생성 확인(build/libs/server-0.0.1-SNAPSHOT.war)
+  - WAR 파일의 압축을 풀어서 내용물을 확인합니다.
+  - WAR 파일을 톰캣 서버에 배포합니다.
+
+    1. 톰캣 서버를 종료합니다.
+    2. 톰캣폴더/webapps 하위를 모두 삭제합니다.
+    3. 빌드된 server-0.0.1-SNAPSHOT.war 파일을 복사합니다.
+    4. 톰캣폴더/webapps 하위에 붙여넣습니다.
+    5. 이름을 변경합니다. (ROOT.war)
+    6. 톰캣 서버를 실행합니다.
+    7. 실행 결과를 확인합니다. (http://localhost:8080/index.html, http://localhost:8080/test)
+
+  - WAR 파일은 웹 애플리케이션 서버(WAS)에 배포할 때 사용하는 파일이며, JAR 파일과 달리 웹 애플리케이션 서버 위에서 실행됩니다. WAR 파일은 HTML, CSS 등의 정적 리소스와 클래스 파일을 모두 포함하며, WEB-INF 폴더 하위에는 자바 클래스와 라이브러리, 그리고 설정 정보가 들어가는 곳입니다. WAR 파일을 톰캣에 배포하기 위해서는 WAR 파일을 톰캣 폴더의 webapps 폴더 하위에 복사하고 이름을 ROOT.war로 변경한 후 톰캣을 실행하면 됩니다.
