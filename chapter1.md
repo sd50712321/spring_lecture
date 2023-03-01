@@ -155,3 +155,59 @@ System.out.println("request.getParameterValues(username)"); String[] usernames =
 - response.getWriter() 메서드를 호출하면, HTTP 응답 바디를 출력할 수 있는 PrintWriter 객체를 얻을 수 있다.
 - PrintWriter 객체를 이용하여, 클라이언트에게 전송할 HTTP 응답 바디를 생성할 수 있다.
 - response.setContentType("text/html")과 같은 메서드를 이용하여, HTTP 응답 헤더의 Content-Type 값을 설정할 수도 있다.
+
+## 서블릿 컨테이너 초기화
+
+- 서블릿 컨테이너 초기화 개발
+  서블릿은 ServletContainerInitializer 라는 초기화 인터페이스를 제공한다. 이름 그대로 서블릿 컨테이너를 초기화하는 기능을 제공한다. ServletContainerInitializer 인터페이스는 다음과 같이 정의되어 있다.
+
+```java
+public interface ServletContainerInitializer {
+  public void onStartup(Set<Class<?>> c, ServletContext ctx) throws ServletException;
+}
+```
+
+- 서블릿 컨테이너는 실행 시점에 초기화 메서드인 onStartup()을 호출하여 애플리케이션에 필요한 기능들을 초기화하거나 등록할 수 있다.
+
+다음은 간단한 예제 코드다. 해당 코드는 서블릿 컨테이너를 초기화하는 MyContainerInitV1 클래스를 구현한다.
+
+```java
+package hello.container;
+
+import jakarta.servlet.ServletContainerInitializer;
+import jakarta.servlet.ServletContext;
+import jakarta.servlet.ServletException;
+import java.util.Set;
+
+public class MyContainerInitV1 implements ServletContainerInitializer {
+    @Override
+    public void onStartup(Set<Class<?>> c, ServletContext ctx) throws ServletException {
+        System.out.println("MyContainerInitV1.onStartup");
+        System.out.println("MyContainerInitV1 c = " + c);
+        System.out.println("MyContainerInitV1 ctx = " + ctx);
+    }
+}
+```
+
+- 추가적으로 WAS에게 실행할 초기화 클래스를 알려주어야 한다. 다음 경로에 파일을 생성해야 한다.
+
+```bash
+resources/META-INF/services/jakarta.servlet.ServletContainerInitializer
+```
+
+- 위 경로에 다음과 같은 내용을 작성한다.
+
+```bash
+hello.container.MyContainerInitV1
+```
+
+- 이렇게 하면 WAS를 실행할 때 해당 클래스를 초기화 클래스로 인식하고 로딩 시점에 실행한다.
+  실제로 WAS를 실행해보면 다음과 같은 로그가 출력된다.
+
+```java
+MyContainerInitV1.onStartup
+MyContainerInitV1 c = null
+MyContainerInitV1 ctx = org.apache.catalina.core.ApplicationContextFacade@65112751
+```
+
+- 해당 초기화 클래스가 실행된 것을 확인할 수 있다.
